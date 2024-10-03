@@ -12,6 +12,9 @@ const medCal = document.querySelector("#medCal");
 const medSug = document.querySelector("#medSug");
 const vegCal = document.querySelector("#vegCal");
 const vegSug = document.querySelector("#vegSug");
+const displayK = document.querySelector("#ketTotal");
+const displayM = document.querySelector("#medTotal");
+const displayV = document.querySelector("#vegTotal");
 
 // Creating objects for: Keto, Mediterranean, and Vegetarian cards
 
@@ -41,39 +44,60 @@ function vegEntry(){
 
 // setting items to localStorage
 
-function savePost(event) {
-    event.preventDefault();
+function savePost() {
     const element = event.target;
-    console.log("Yhis is the save enet");
+    console.log("This is the save event");
     if(element.matches("#keto")) {
         let kEntry = ketEntry();
         localStorage.setItem("keto", JSON.stringify(kEntry));
     }else if(element.matches("#med")) {
         let mEntry = medEntry();
         localStorage.setItem("mediterranean", JSON.stringify(mEntry));
-    }else if(element.matches("veg")) {
-                let vEntry = vegEntry();
-                localStorage.setItem("vegetarian", JSON.stringify(vEntry));
-            };
-        };
-        
-        // retrieving items from localStorage
-        
-        function retrieve() {
-            
-        };
-        
-        // Setting the event listeners
-        /* I do not know if there will be a submit button for each card. As it stands, the current card has two inputs
-        and no means of submitting. In case this is, in fact, the desired layout, I will have to trigger the submit
-        when the user clicks off of the card. */
-        /* Since buttons were added, I'll make the event a click event. I cannot use button as a query Selector,
-        since button is used in the nav. Maybe use a class? */
-        
-        
-        const dietCard = document.querySelectorAll(".enter");
-        // dietCard.addEventListener("click", savePost);
-        // dietCard.forEach("click", savePost);
-        for(let i = 0; i < dietCard.length; i++){
-            dietCard[i].addEventListener("click", savePost);
-        };
+    }else if(element.matches("#veg")) {
+        let vEntry = vegEntry();
+        localStorage.setItem("vegetarian", JSON.stringify(vEntry));
+    };
+};
+
+// retrieving items from localStorage
+
+function retrieve() {
+    const element = event.target;
+    if(element.matches("#keto")){
+        const lastK = JSON.parse(localStorage.getItem("keto"));
+        displayK.value = `Calories: ${lastK.calCount} and Sugar(in grams): ${lastK.sugCount}`;
+        console.log("The calories:", lastK.calCount);
+
+    }else if(element.matches("#med")){
+        const lastM = JSON.parse(localStorage.getItem("mediterranean"));
+        displayM.value = `Calories: ${lastM.calCount} and Sugar(in grams): ${lastM.sugCount}`;
+
+    }else if(element.matches("#veg")){
+        const lastV = JSON.parse(localStorage.getItem("vegetarian"));
+        displayV.value = `Calories: ${lastV.calCount} and Sugar(in grams): ${lastV.sugCount}`;
+
+    };
+};
+
+// Setting the event listeners
+/* I do not know if there will be a submit button for each card. As it stands, the current card has two inputs
+and no means of submitting. In case this is, in fact, the desired layout, I will have to trigger the submit
+when the user clicks off of the card. */
+/* Since buttons were added, I'll make the event a click event. I cannot use button as a query Selector,
+since button is used in the nav. Maybe use a class? */
+
+// dietCard.addEventListener("click", savePost);
+// dietCard.forEach("click", savePost);
+const dietCards = document.querySelectorAll(".enter");
+console.log(`dietCards: ${dietCards}; its length: ${dietCards.length}`);
+// console.log(`ketCal: ${ketCal.cla}`);
+for(let i = 0; i < dietCards.length; i++){
+    console.log("In the for loop");
+    console.log(`This is iteration number ${i} and ${dietCards[i]}`);
+    console.log(`How about properties? ${dietCards[i].className}`);
+    dietCards[i].addEventListener("click", function (event) {
+        event.preventDefault();
+        savePost(); 
+        retrieve();
+    });
+};
