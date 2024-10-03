@@ -46,14 +46,14 @@ function savePost(event) {
     const element = event.target;
     console.log("Yhis is the save enet");
     if(element.matches("#keto")) {
-        ketEntry();
-        localStorage.setItem("keto", JSON.stringify(ketPost));
+        let kEntry = ketEntry();
+        localStorage.setItem("keto", JSON.stringify(kEntry));
     }else if(element.matches("#med")) {
-        medEntry();
-        localStorage.setItem("mediterranean", JSON.stringify(medPost));
+        let mEntry = medEntry();
+        localStorage.setItem("mediterranean", JSON.stringify(mEntry));
     }else if(element.matches("veg")) {
-                vegEntry();
-                localStorage.setItem("vegetarian", JSON.stringify(vegPost));
+                let vEntry = vegEntry();
+                localStorage.setItem("vegetarian", JSON.stringify(vEntry));
             };
         };
         
@@ -71,5 +71,9 @@ function savePost(event) {
         since button is used in the nav. Maybe use a class? */
         
         
-        const dietCard = document.querySelector(".enter");
-        dietCard.addEventListener("click", savePost);
+        const dietCard = document.querySelectorAll(".enter");
+        // dietCard.addEventListener("click", savePost);
+        // dietCard.forEach("click", savePost);
+        for(let i = 0; i < dietCard.length; i++){
+            dietCard[i].addEventListener("click", savePost);
+        };
