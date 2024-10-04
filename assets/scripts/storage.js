@@ -21,6 +21,12 @@ const displayMC = document.querySelector("#medTotalC");
 const displayMS = document.querySelector("#medTotalS");
 const displayVC = document.querySelector("#vegTotalC");
 const displayVS = document.querySelector("#vegTotalS");
+let sumKC = 0;
+let sumKS = 0;
+let sumMC = 0;
+let sumMS = 0;
+let sumVC = 0;
+let sumVS = 0;
 
 // Creating objects for: Keto, Mediterranean, and Vegetarian cards
 
@@ -49,12 +55,15 @@ function vegEntry(){
 };
 
 // setting items to localStorage
+// Also need to add for total
 
 function savePost() {
     const element = event.target;
     console.log("This is the save event");
     if(element.matches("#keto")) {
         let kEntry = ketEntry();
+        sumKC = sumKC + kEntry.calCount;
+        console.log(`Keto cal count sum ${sumKC}`);
         localStorage.setItem("keto", JSON.stringify(kEntry));
     }else if(element.matches("#med")) {
         let mEntry = medEntry();
