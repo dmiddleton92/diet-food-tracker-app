@@ -62,8 +62,6 @@ function savePost() {
     console.log("This is the save event");
     if(element.matches("#keto")) {
         let kEntry = ketEntry();
-        sumKC = sumKC + kEntry.calCount;
-        console.log(`Keto cal count sum ${sumKC}`);
         localStorage.setItem("keto", JSON.stringify(kEntry));
     }else if(element.matches("#med")) {
         let mEntry = medEntry();
@@ -82,21 +80,29 @@ function retrieve() {
         const lastK = JSON.parse(localStorage.getItem("keto"));
         // displayK.value = `Calories: ${lastK.calCount} and Sugar(in grams): ${lastK.sugCount}`;
         console.log(lastK.calCount);
-        displayKC.textContent = lastK.calCount;
-        displayKS.textContent = lastK.sugCount;
+        // adding
+        sumKC = sumKC + Number(lastK.calCount);
+        sumKS = sumKS + Number(lastK.sugCount);
+        console.log(`Keto cal count sum ${sumKC}`);
+        displayKC.textContent = sumKC;
+        displayKS.textContent = sumKS;
         console.log("The calories:", lastK.calCount);
         
     }else if(element.matches("#med")){
         const lastM = JSON.parse(localStorage.getItem("mediterranean"));
         // displayM.value = `Calories: ${lastM.calCount} and Sugar(in grams): ${lastM.sugCount}`;
-        displayMC.textContent = lastM.calCount;
-        displayMS.textContent = lastM.sugCount;
+        sumMC = sumMC + Number(lastM.calCount);
+        sumMS = sumMS + Number(lastM.sugCount);
+        displayMC.textContent = sumMC;
+        displayMS.textContent = sumMS;
         
     }else if(element.matches("#veg")){
         const lastV = JSON.parse(localStorage.getItem("vegetarian"));
         // displayV.value = `Calories: ${lastV.calCount} and Sugar(in grams): ${lastV.sugCount}`;
-        displayVC.textContent = lastV.calCount;
-        displayVS.textContent = lastV.sugCount;
+        sumVC = sumVC + Number(lastV.calCount);
+        sumVS = sumVS + Number(lastV.sugCount);
+        displayVC.textContent = sumVC;
+        displayVS.textContent = sumVS;
 
     };
 };
