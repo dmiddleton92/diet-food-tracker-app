@@ -42,8 +42,7 @@
             <section class="col-md-4 mb-3">
                 <section class="card" style="width: 18rem;">
                     <h2 class="card-title" style="text-align: center;">KETO</h2>
-                    <img class="card-img-top" src="https://images.unsplash.com/photo-1506470282729-2d5d8433e9b9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGtldG8lMjBkaWV0fGVufDB8fDB8fHww" alt="an image of some food">
-                    <section class="card-body">
+                    <img class="card-img-top" src="https://images.unsplash.com/photo-1506470282729-2d5d8433e9b9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGtldG8lMjBkaWV0fGV                    <section class="card-body">
                         <form>
                             <label for="ketCal">Calories</label>
                             <br/>
@@ -52,8 +51,10 @@
                             <input id="ketSug"class="card-text" type="number" placeholder="Sugar"></input>
                             <button id="keto" type="button" class="btn btn-outline-dark enter">LOG</button>
                             <h6>Totals</h6>
-                            <label for="ketTotal">Total calories and sugar</label>
-                            <input id="ketTotal" value="0" disabled="true"></input>
+                            <!-- <label for="ketTotal">Total calories and sugar</label> -->
+                            <!-- <input id="ketTotal" value="0" disabled="true" size="35"></input> -->
+                            <p>Total Calories: <span id="ketTotalC">0</span></p>
+                            <p>Total Sugars: <span id="ketTotalS">0</span></p>
                         </form>
                     </section>
                 </section>
@@ -71,13 +72,15 @@
                             <input id="medSug" class="card-text" type="number" placeholder="Sugar"></input>
                             <button id="med" type="button" class="btn btn-outline-dark enter">LOG</button>
                             <h6>Totals</h6>
-                            <label for="medTotal">Total calories and sugar</label>
+                            <!-- <label for="medTotal">Total calories and sugar</label> -->
                             <!-- <input id="medTotal" value="0" disabled="true"></input> this ain't long enough--> 
-                             <!-- Might want two spans side-by-side -->
-
-                            </form>
-                        </section>
+                            <!-- Might want two spans side-by-side -->
+                            <p>Total Calories: <span id="medTotalC">0</span></p>
+                            <p>Total Sugars: <span id="medTotalS">0</span></p>
+                            
+                        </form>
                     </section>
+                </section>
             </section>
             <section class="col-md-4 mb-3">
                 <section class="card" style="width: 18rem;">
@@ -92,8 +95,10 @@
                             <input id="vegSug" class="card-text" type="number" placeholder="Sugar"></input>
                             <button id="veg" type="button" class="btn btn-outline-dark enter">LOG</button>
                             <h6>Totals</h6>
-                            <label for="vegTotal">Total calories and sugar</label>
-                            <input id="vegTotal" value="0" disabled="true"></input>
+                            <!-- <label for="vegTotal">Total calories and sugar</label> -->
+                            <!-- <input id="vegTotal" value="0" disabled="true"></input> -->
+                            <p>Total Calories: <span id="vegTotalC">0</span></p>
+                            <p>Total Sugars: <span id="vegTotalS">0</span></p>
                         </form>
                     </section>
                 </section>
@@ -104,6 +109,10 @@
         <p id= info1 class="fw-medium">Keto is a diet based on limiting the sugar intake in ones' diet.</p>
         <p id= info2 type="text"> Mediterranean diet info</p>
         <p id= info3 type="text"> Vegetarian diet info</p>
+  </section>
+                </section>
+            </section>    
+        </section>
     </section>
 </main>
 <script src="./assets/scripts/storage.js"></script>

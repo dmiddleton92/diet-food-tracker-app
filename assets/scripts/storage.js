@@ -12,9 +12,15 @@ const medCal = document.querySelector("#medCal");
 const medSug = document.querySelector("#medSug");
 const vegCal = document.querySelector("#vegCal");
 const vegSug = document.querySelector("#vegSug");
-const displayK = document.querySelector("#ketTotal");
-const displayM = document.querySelector("#medTotal");
-const displayV = document.querySelector("#vegTotal");
+// const displayK = document.querySelector("#ketTotal"); an input tag is too small for both inputs
+// const displayM = document.querySelector("#medTotal"); need to diplay them separately
+// const displayV = document.querySelector("#vegTotal");
+const displayKC = document.querySelector("#ketTotalC");
+const displayKS = document.querySelector("#ketTotalS");
+const displayMC = document.querySelector("#medTotalC");
+const displayMS = document.querySelector("#medTotalS");
+const displayVC = document.querySelector("#vegTotalC");
+const displayVS = document.querySelector("#vegTotalS");
 
 // Creating objects for: Keto, Mediterranean, and Vegetarian cards
 
@@ -65,16 +71,23 @@ function retrieve() {
     const element = event.target;
     if(element.matches("#keto")){
         const lastK = JSON.parse(localStorage.getItem("keto"));
-        displayK.value = `Calories: ${lastK.calCount} and Sugar(in grams): ${lastK.sugCount}`;
+        // displayK.value = `Calories: ${lastK.calCount} and Sugar(in grams): ${lastK.sugCount}`;
+        console.log(lastK.calCount);
+        displayKC.textContent = lastK.calCount;
+        displayKS.textContent = lastK.sugCount;
         console.log("The calories:", lastK.calCount);
-
+        
     }else if(element.matches("#med")){
         const lastM = JSON.parse(localStorage.getItem("mediterranean"));
-        displayM.value = `Calories: ${lastM.calCount} and Sugar(in grams): ${lastM.sugCount}`;
-
+        // displayM.value = `Calories: ${lastM.calCount} and Sugar(in grams): ${lastM.sugCount}`;
+        displayMC.textContent = lastM.calCount;
+        displayMS.textContent = lastM.sugCount;
+        
     }else if(element.matches("#veg")){
         const lastV = JSON.parse(localStorage.getItem("vegetarian"));
-        displayV.value = `Calories: ${lastV.calCount} and Sugar(in grams): ${lastV.sugCount}`;
+        // displayV.value = `Calories: ${lastV.calCount} and Sugar(in grams): ${lastV.sugCount}`;
+        displayVC.textContent = lastV.calCount;
+        displayVS.textContent = lastV.sugCount;
 
     };
 };
