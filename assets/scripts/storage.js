@@ -129,3 +129,17 @@ for(let i = 0; i < dietCards.length; i++){
         retrieve();
     });
 };
+
+//Reset value to zero for new logging info
+const elements = document.querySelectorAll(".reset");
+for (let i=0;i<elements.length;i++){
+    elements[i].addEventListener('click', function(){
+        displayKC.textContent = "0";
+        displayKS.textContent = "0";
+        displayMC.textContent = "0";
+        displayMS.textContent = "0";
+        displayVC.textContent = "0";
+        displayVS.textContent = "0";
+
+    })
+};
