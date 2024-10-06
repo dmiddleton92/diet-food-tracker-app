@@ -15,43 +15,73 @@ const vegSug = document.querySelector("#vegSug");
 // const displayK = document.querySelector("#ketTotal"); an input tag is too small for both inputs
 // const displayM = document.querySelector("#medTotal"); need to diplay them separately
 // const displayV = document.querySelector("#vegTotal");
+
+// These are the displays for each P tag for each card
 const displayKC = document.querySelector("#ketTotalC");
 const displayKS = document.querySelector("#ketTotalS");
 const displayMC = document.querySelector("#medTotalC");
 const displayMS = document.querySelector("#medTotalS");
 const displayVC = document.querySelector("#vegTotalC");
 const displayVS = document.querySelector("#vegTotalS");
+// Necessary for showing the calorie/sugar totals
 let sumKC = 0;
 let sumKS = 0;
 let sumMC = 0;
 let sumMS = 0;
 let sumVC = 0;
 let sumVS = 0;
+// This is for the reset buttons; this Boolean determines the kind of object created (empty or otherwise)
+let isReset = false;
 
 // Creating objects for: Keto, Mediterranean, and Vegetarian cards
+// Setting fields to 0 when reset is pressed
 
 function ketEntry(){
-    const ketPost = {
-        calCount: ketCal.value,
-        sugCount: ketSug.value,
+    if(isReset === false) {
+        const ketPost = {
+            calCount: ketCal.value,
+            sugCount: ketSug.value,
+        };
+        return ketPost;
+    }else{
+        const ketPost = {
+            calCount: 0,
+            sugCount: 0,
+        };
+        return ketPost;
     };
-    return ketPost;
 };
 
 function medEntry(){
-    const medPost = {
-        calCount: medCal.value,
-        sugCount: medSug.value,
+    if(isReset === false){
+        const medPost = {
+            calCount: medCal.value,
+            sugCount: medSug.value,
+        };
+        return medPost;
+    }else{
+        const medPost = {
+            calCount: 0,
+            sugCount: 0,
+        };
+        return medPost;
     };
-    return medPost;
 };
 
 function vegEntry(){
-    const vegPost = {
-        calCount: vegCal.value,
-        sugCount: vegSug.value,
+    if(isReset === false) {
+        const vegPost = {
+            calCount: vegCal.value,
+            sugCount: vegSug.value,
+        };
+        return vegPost;
+    }else{
+        const vegPost = {
+            calCount: 0,
+            sugCount: 0,
+        };
+        return vegPost;
     };
-    return vegPost;
 };
 
 // setting items to localStorage
@@ -103,7 +133,7 @@ function retrieve() {
         sumVS = sumVS + Number(lastV.sugCount);
         displayVC.textContent = sumVC;
         displayVS.textContent = sumVS;
-
+        
     };
 };
 
@@ -131,20 +161,54 @@ for(let i = 0; i < dietCards.length; i++){
 };
 
 //Reset value to zero for new logging info
-const resetButton = document.querySelector(".reset");
-const formInput = document.querySelector(".formset");
-let inputElements = formInput.getElementsByTagName("input");
 
-resetButton.addEventListener('click' , function(){
+/* That last push introduced two issues:
+1) Reset butons are affecting the wrong card
+2) Reset buttons do not reset
+For #1, event.target should resolve the issue. Since Shane used querySelector, the function was applied
+to only the first button. Clicking on the second and third reset buttons does, unsurprisingly, nothing.
+Using querySelectorAll will be an easy fix.
+For #2, the function needs to set the appropriate sum to 0. As it stands, the function sets the
+textContent to 0 and not the variable that holds the sum. It is a psuedo-reset, if you will.*/
 
-for(let i=0;i<inputElements.length;i++){
-    inputElements[i].value="";
-        displayKC.textContent = "0";
-        displayKS.textContent = "0";
-        displayMC.textContent = "0";
-        displayMS.textContent = "0";
-        displayVC.textContent = "0";
-        displayVS.textContent = "0";
-
+// You need to: Reset localStorage to 0 AND reset the sums to 0
+function resetCard() {
+    const element = event.target;
+    isReset = true;
+    if(element.matches("#resetK")){
+        // localStorage
+        let kEntry = ketEntry();
+        localStorage.setItem("keto", JSON.stringify(kEntry));
+        // display
+        sumKC = 0;
+        sumKS = 0;
+        displayKC.textContent = sumKC;
+        displayKS.textContent = sumKS;
+    }else if(element.matches("#resetM")){
+        // localStorage
+        let mEntry = medEntry();
+        localStorage.setItem("mediterranean", JSON.stringify(mEntry));
+        // display
+        sumMC = 0;
+        sumMS = 0;
+        displayMC.textContent = sumMC;
+        displayMS.textContent = sumMS;
+    }else if(element.matches("#resetV")){
+        // localStorage
+        let vEntry = vegEntry();
+        localStorage.setItem("vegetarian", JSON.stringify(vEntry));
+        // display
+        sumVC = 0;
+        sumVS = 0;
+        displayVC.textContent = sumVC;
+        displayVS.textContent = sumVS;
     };
-});
+    isReset = false;
+};
+
+const resetButtons = document.querySelectorAll(".reset");
+
+for(let i=0;i<resetButtons.length;i++){
+    resetButtons[i].addEventListener("click" , function(event) {
+        resetCard();
+    })};
