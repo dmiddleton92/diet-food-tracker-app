@@ -89,7 +89,7 @@ function vegEntry(){
 
 function savePost() {
     const element = event.target;
-    console.log("This is the save event");
+    //console.log("This is the save event");
     if(element.matches("#keto")) {
         let kEntry = ketEntry();
         localStorage.setItem("keto", JSON.stringify(kEntry));
@@ -109,16 +109,16 @@ function retrieve() {
     if(element.matches("#keto")){
         const lastK = JSON.parse(localStorage.getItem("keto"));
         // displayK.value = `Calories: ${lastK.calCount} and Sugar(in grams): ${lastK.sugCount}`;
-        console.log(lastK.calCount);
+        //console.log(lastK.calCount);
         // adding
         sumKC = sumKC + Number(lastK.calCount);
         sumKS = sumKS + Number(lastK.sugCount);
-        console.log(`Keto cal count sum ${sumKC}`);
+        //console.log(`Keto cal count sum ${sumKC}`);
         displayKC.textContent = sumKC;
         displayKS.textContent = sumKS;
         localStorage.setItem("sumKC", sumKC);
         localStorage.setItem("sumKS", sumKS);
-        console.log("The calories:", lastK.calCount);
+        //console.log("The calories:", lastK.calCount);
         ketCal.value = "";
         ketSug.value = "";
         
@@ -168,12 +168,12 @@ since button is used in the nav. Maybe use a class? */
 // dietCard.addEventListener("click", savePost);
 // dietCard.forEach("click", savePost);
 const dietCards = document.querySelectorAll(".enter");
-console.log(`dietCards: ${dietCards}; its length: ${dietCards.length}`);
+//console.log(`dietCards: ${dietCards}; its length: ${dietCards.length}`);
 // console.log(`ketCal: ${ketCal.cla}`);
 for(let i = 0; i < dietCards.length; i++){
-    console.log("In the for loop");
-    console.log(`This is iteration number ${i} and ${dietCards[i]}`);
-    console.log(`How about properties? ${dietCards[i].className}`);
+    //console.log("In the for loop");
+    //console.log(`This is iteration number ${i} and ${dietCards[i]}`);
+    //console.log(`How about properties? ${dietCards[i].className}`);
     dietCards[i].addEventListener("click", function (event) {
         event.preventDefault();
         savePost(); 
