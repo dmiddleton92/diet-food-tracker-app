@@ -23,13 +23,13 @@ const displayMC = document.querySelector("#medTotalC");
 const displayMS = document.querySelector("#medTotalS");
 const displayVC = document.querySelector("#vegTotalC");
 const displayVS = document.querySelector("#vegTotalS");
-// Necessary for showing the calorie/sugar totals
-let sumKC = 0;
-let sumKS = 0;
-let sumMC = 0;
-let sumMS = 0;
-let sumVC = 0;
-let sumVS = 0;
+// Necessary for showing the calorie/sugar totals (setting it to 0 results in 0 displaying on page load)
+let sumKC = Number(localStorage.getItem("sumKC"));
+let sumKS = Number(localStorage.getItem("sumKS"));
+let sumMC = Number(localStorage.getItem("sumMC"));
+let sumMS = Number(localStorage.getItem("sumMS"));
+let sumVC = Number(localStorage.getItem("sumVC"));
+let sumVS = Number(localStorage.getItem("sumVS"));
 // This is for the reset buttons; this Boolean determines the kind of object created (empty or otherwise)
 let isReset = false;
 
@@ -116,7 +116,11 @@ function retrieve() {
         console.log(`Keto cal count sum ${sumKC}`);
         displayKC.textContent = sumKC;
         displayKS.textContent = sumKS;
+        localStorage.setItem("sumKC", sumKC);
+        localStorage.setItem("sumKS", sumKS);
         console.log("The calories:", lastK.calCount);
+        ketCal.value = "";
+        ketSug.value = "";
         
     }else if(element.matches("#med")){
         const lastM = JSON.parse(localStorage.getItem("mediterranean"));
@@ -125,6 +129,10 @@ function retrieve() {
         sumMS = sumMS + Number(lastM.sugCount);
         displayMC.textContent = sumMC;
         displayMS.textContent = sumMS;
+        localStorage.setItem("sumMC", sumMC);
+        localStorage.setItem("sumMS", sumMS);
+        medCal.value = "";
+        medSug.value = "";
         
     }else if(element.matches("#veg")){
         const lastV = JSON.parse(localStorage.getItem("vegetarian"));
@@ -133,9 +141,22 @@ function retrieve() {
         sumVS = sumVS + Number(lastV.sugCount);
         displayVC.textContent = sumVC;
         displayVS.textContent = sumVS;
+        localStorage.setItem("sumVC", sumVC);
+        localStorage.setItem("sumVS", sumVS);
+        vegCal.value = "";
+        vegSug.value = "";
         
     };
 };
+
+// Function for displaying the stored sums on,page load, hopefully
+
+displayKC.textContent = localStorage.getItem("sumKC");
+displayKS.textContent = localStorage.getItem("sumKS");
+displayMC.textContent = localStorage.getItem("sumMC");
+displayMS.textContent = localStorage.getItem("sumMS");
+displayVC.textContent = localStorage.getItem("sumVC");
+displayVS.textContent = localStorage.getItem("sumVS");
 
 // Setting the event listeners
 /* I do not know if there will be a submit button for each card. As it stands, the current card has two inputs
@@ -179,29 +200,47 @@ function resetCard() {
         // localStorage
         let kEntry = ketEntry();
         localStorage.setItem("keto", JSON.stringify(kEntry));
+        // the sums
+        localStorage.setItem("sumKC", 0);
+        localStorage.setItem("sumKS", 0);
         // display
-        sumKC = 0;
-        sumKS = 0;
+        sumKC = localStorage.getItem("sumKC");
+        sumKS = localStorage.getItem("sumKS");
         displayKC.textContent = sumKC;
         displayKS.textContent = sumKS;
+        // the inputs
+        ketCal.value = "";
+        ketSug.value = "";
     }else if(element.matches("#resetM")){
         // localStorage
         let mEntry = medEntry();
         localStorage.setItem("mediterranean", JSON.stringify(mEntry));
+        // the sums
+        localStorage.setItem("sumMC", 0);
+        localStorage.setItem("sumMS", 0);
         // display
-        sumMC = 0;
-        sumMS = 0;
+        sumMC = localStorage.getItem("sumMC");
+        sumMS = localStorage.getItem("sumMS");
         displayMC.textContent = sumMC;
         displayMS.textContent = sumMS;
+        // the inputs
+        medCal.value = "";
+        medSug.value = "";
     }else if(element.matches("#resetV")){
         // localStorage
         let vEntry = vegEntry();
         localStorage.setItem("vegetarian", JSON.stringify(vEntry));
+        // the sums
+        localStorage.setItem("sumVC", 0);
+        localStorage.setItem("sumVS", 0);
         // display
-        sumVC = 0;
-        sumVS = 0;
+        sumVC = localStorage.getItem("sumVC");
+        sumVS = localStorage.getItem("sumVS");
         displayVC.textContent = sumVC;
         displayVS.textContent = sumVS;
+        // the inputs
+        vegCal.value = "";
+        vegSug.value = "";
     };
     isReset = false;
 };
