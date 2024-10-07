@@ -204,8 +204,8 @@ function resetCard() {
         localStorage.setItem("sumKC", 0);
         localStorage.setItem("sumKS", 0);
         // display
-        sumKC = localStorage.getItem("sumKC");
-        sumKS = localStorage.getItem("sumKS");
+        sumKC = Number(localStorage.getItem("sumKC"));
+        sumKS = Number(localStorage.getItem("sumKS"));
         displayKC.textContent = sumKC;
         displayKS.textContent = sumKS;
         // the inputs
@@ -219,8 +219,8 @@ function resetCard() {
         localStorage.setItem("sumMC", 0);
         localStorage.setItem("sumMS", 0);
         // display
-        sumMC = localStorage.getItem("sumMC");
-        sumMS = localStorage.getItem("sumMS");
+        sumMC = Number(localStorage.getItem("sumMC"));
+        sumMS = Number(localStorage.getItem("sumMS"));
         displayMC.textContent = sumMC;
         displayMS.textContent = sumMS;
         // the inputs
@@ -234,8 +234,8 @@ function resetCard() {
         localStorage.setItem("sumVC", 0);
         localStorage.setItem("sumVS", 0);
         // display
-        sumVC = localStorage.getItem("sumVC");
-        sumVS = localStorage.getItem("sumVS");
+        sumVC = Number(localStorage.getItem("sumVC"));
+        sumVS = Number(localStorage.getItem("sumVS"));
         displayVC.textContent = sumVC;
         displayVS.textContent = sumVS;
         // the inputs
